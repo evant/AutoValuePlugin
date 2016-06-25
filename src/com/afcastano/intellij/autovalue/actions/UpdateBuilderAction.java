@@ -14,6 +14,6 @@ public class UpdateBuilderAction extends BuilderAction {
 
     @Override
     public boolean isAvailable(AutoValueFactory factory) {
-        return factory.containsBuilderClass() && !factory.isBuilderUpToDate();
+        return factory.containsBuilderClass() && (!factory.isBuilderUpToDate() || !factory.containsBuilderFactoryMethod());
     }
 }

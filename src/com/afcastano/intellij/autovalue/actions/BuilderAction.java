@@ -70,7 +70,7 @@ public abstract class BuilderAction extends AbstractIntentionAction implements H
             @Override
             public void run() {
 
-                boolean containsBuildMethod = containsBuildMethod(builderClass);
+                boolean containsBuildMethod = factory.containsBuildMethod();
 
                 for (PsiMethod method : pendingAddBuilderMethods) {
 
@@ -96,7 +96,7 @@ public abstract class BuilderAction extends AbstractIntentionAction implements H
                     targetClass.add(builderClass);
                 }
 
-                if (!containsBuilderFactoryMethod(targetClass)) {
+                if (!factory.containsBuilderFactoryMethod()) {
                     targetClass.addAfter(builderFactoryMethod, lastMethod);
                 }
 
@@ -128,13 +128,5 @@ public abstract class BuilderAction extends AbstractIntentionAction implements H
             }
         }
         return pendingBuilderMethods;
-    }
-
-    private boolean containsBuilderFactoryMethod(PsiClass targetClass) {
-        return targetClass.findMethodsByName("builder", true).length != 0;
-    }
-
-    private boolean containsBuildMethod(PsiClass builderClass) {
-        return builderClass.findMethodsByName("build", true).length != 0;
     }
 }

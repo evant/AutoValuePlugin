@@ -299,4 +299,12 @@ public class AutoValueFactory {
         String methodReturnName = psiMethod.getReturnType().getPresentableText();
         return methodReturnName.equals("Builder");
     }
+
+    public boolean containsBuilderFactoryMethod() {
+        return targetClass.findMethodsByName("builder", true).length != 0;
+    }
+
+    public boolean containsBuildMethod() {
+        return builderClass.findMethodsByName("build", true).length != 0;
+    }
 }
